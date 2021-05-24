@@ -21,6 +21,7 @@ Remember to always checkout to correct feature branch before doing any changes a
 `git add <filename>`
 `git commit -m '<message>'`
 `git push origin <branch name>`
+`git push --set-upstream origin <branch name>`
 
 ## How to run the app locally
 
