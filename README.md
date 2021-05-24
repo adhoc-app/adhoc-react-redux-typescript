@@ -1,8 +1,35 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
-## Available Scripts
+## How to work with git
+
+### To get latest code from upstream
+
+`git fetch upstream main`
+`git pull upstream main`
+
+### To work with branches
+
+`git branch`
+`git checkout <existing branch name>`
+`git checkout -b <new branch name>`
+
+### To commit your changes
+
+Remember to always checkout to correct feature branch before doing any changes and committing them.
+
+`git status`
+`git add <filename>`
+`git commit -m '<message>'`
+`git push origin <branch name>`
+`git push --set-upstream origin <branch name>`
+
+## How to run the app locally
 
 In the project directory, you can run:
+
+### `yarn`
+
+Run `yarn` the first time you clone the repository.
 
 ### `yarn start`
 
