@@ -9,11 +9,12 @@ import React, { useState } from "react";
 import { Option } from "../../app/types";
 
 type QuestionFormProps = {
+  index: number | string;
   options: Option[];
   prompt: string;
 };
 
-function QuestionForm({ options, prompt }: QuestionFormProps) {
+function QuestionForm({ index, options, prompt }: QuestionFormProps) {
   const [selected, setSelected] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

@@ -11,7 +11,7 @@ type CardProps = {
 function Card({ index, options, prompt }: CardProps) {
   return (
     <div key={index}>
-      <QuestionForm options={options} prompt={prompt} />
+      <QuestionForm index={index} options={options} prompt={prompt} />
     </div>
   );
 }
