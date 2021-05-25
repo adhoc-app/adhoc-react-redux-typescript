@@ -6,9 +6,9 @@ const mockQuestions = [
     prompt: "ăn cơm",
     options: [
       { value: 1, label: "sleep" },
-      { value: 1, label: "write" },
-      { value: 1, label: "eat" },
-      { value: 1, label: "work" },
+      { value: 2, label: "write" },
+      { value: 3, label: "eat" },
+      { value: 4, label: "work" },
     ],
   },
   {
