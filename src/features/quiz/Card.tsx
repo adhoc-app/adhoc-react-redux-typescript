@@ -10,7 +10,7 @@ type CardProps = {
 
 function Card({ index, options, prompt }: CardProps) {
   return (
-    <div key={index}>
+    <div className="border-b-2" key={index}>
       <QuestionForm index={index} options={options} prompt={prompt} />
     </div>
   );
