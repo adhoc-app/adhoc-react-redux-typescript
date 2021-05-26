@@ -16,12 +16,12 @@ const mockQuestions = [
 function Quiz() {
   const questions = mockQuestions;
   return (
-    <>
+    <div className="flex h-screen justify-center items-center">
       {questions &&
         questions.map(({ prompt, options }, index) => (
           <Card prompt={prompt} options={options} index={index} />
         ))}
-    </>
+    </div>
   );
 }
 
