@@ -3,15 +3,6 @@ import Card from "./Card";
 
 const mockQuestions = [
   {
-    prompt: "ăn cơm",
-    options: [
-      { value: 1, label: "sleep" },
-      { value: 2, label: "write" },
-      { value: 3, label: "eat" },
-      { value: 4, label: "work" },
-    ],
-  },
-  {
     prompt: "Con mèo trèo cây cau.",
     options: [
       { value: 1, label: "The cat climbs on a tall tree." },
@@ -25,12 +16,12 @@ const mockQuestions = [
 function Quiz() {
   const questions = mockQuestions;
   return (
-    <>
+    <div className="flex h-screen justify-center items-center">
       {questions &&
         questions.map(({ prompt, options }, index) => (
           <Card prompt={prompt} options={options} index={index} />
         ))}
-    </>
+    </div>
   );
 }
 

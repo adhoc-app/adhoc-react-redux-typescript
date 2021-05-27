@@ -48,9 +48,22 @@ function QuestionForm({ index, options, prompt }: QuestionFormProps) {
           ))}
         </RadioGroup>
         <FormHelperText>{helperText}</FormHelperText>
-        <Button type="submit" variant="outlined" color="primary">
-          Check Answer
-        </Button>
+        <div className="flex flex-col md:flex-row ">
+          <Button
+            id={`back_btn_${index}`}
+            variant="text"
+            color="default"
+            // onClick={() => handleGoBack()}
+          >
+            Back
+          </Button>
+          <Button type="submit" variant="contained" color="primary">
+            Check Answer
+          </Button>
+          <Button id={`next_btn_${index}`} variant="outlined" color="secondary">
+            Next
+          </Button>
+        </div>
       </FormControl>
     </form>
   );
