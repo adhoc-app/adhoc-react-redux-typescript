@@ -11,7 +11,7 @@ const mockQuestions: Question[] = [
       { value: 3, label: "The cat climbs on a areca tree." },
       { value: 4, label: "The lion climbs on a tall tree." },
     ],
-    type: "text",
+    type: "other",
   },
 ];
 

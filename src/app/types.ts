@@ -3,7 +3,7 @@ export type Option = {
   label: string;
 };
 
-export type QuestionType = "radio" | "text";
+export type QuestionType = "radio" | "text" | "other";
 
 export type Question = {
   prompt: string;
