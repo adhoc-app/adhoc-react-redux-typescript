@@ -30,18 +30,20 @@ function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
   };
 
   const renderOptions = () => {
-    if (type === "radio") {
-      return (
-        <RadioInput
-          questionIndex={index}
-          selected={selected}
-          handleChange={handleChange}
-          options={options}
-        />
-      );
-    }
-    if (type === "text") {
-      return <TextInput selected={selected} handleChange={handleChange} />;
+    switch (type) {
+      case "radio":
+        return (
+          <RadioInput
+            questionIndex={index}
+            selected={selected}
+            handleChange={handleChange}
+            options={options}
+          />
+        );
+      case "text":
+        return <TextInput selected={selected} handleChange={handleChange} />;
+      default:
+        return <p>Mammamia!</p>;
     }
   };
 
