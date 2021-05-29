@@ -1,22 +1,22 @@
 import {
   Button,
   FormControl,
-  FormControlLabel,
   FormHelperText,
   FormLabel,
-  Radio,
-  RadioGroup,
 } from "@material-ui/core";
 import React, { useState } from "react";
-import { Option } from "../../app/types";
+import { Option, QuestionType } from "../../app/types";
+import RadioInput from "./RadioInput";
+import TextInput from "./TextInput";
 
 type QuestionFormProps = {
-  index: number | string;
+  index: number;
   options: Option[];
   prompt: string;
+  type: QuestionType;
 };
 
-function QuestionForm({ index, options, prompt }: QuestionFormProps) {
+function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
   const [selected, setSelected] = useState("");
   const [helperText, setHelperText] = useState("");
 
@@ -29,24 +29,27 @@ function QuestionForm({ index, options, prompt }: QuestionFormProps) {
     setHelperText("Clicked");
   };
 
+  const renderOptions = () => {
+    if (type === "radio") {
+      return (
+        <RadioInput
+          questionIndex={index}
+          selected={selected}
+          handleChange={handleChange}
+          options={options}
+        />
+      );
+    }
+    if (type === "text") {
+      return <TextInput selected={selected} handleChange={handleChange} />;
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit}>
       <FormControl component="fieldset">
         <FormLabel component="legend">{prompt}</FormLabel>
-        <RadioGroup
-          aria-label={`question${index}`}
-          name={`question${index}`}
-          value={selected}
-          onChange={handleChange}
-        >
-          {options.map(({ value, label }) => (
-            <FormControlLabel
-              value={value.toString()}
-              control={<Radio />}
-              label={label}
-            />
-          ))}
-        </RadioGroup>
+        {renderOptions()}
         <FormHelperText>{helperText}</FormHelperText>
         <div className="flex flex-col md:flex-row ">
           <Button
