@@ -6,12 +6,12 @@ const mockQuestions: Question[] = [
   {
     prompt: "Con mèo trèo cây cau.",
     options: [
-      { value: 1, label: "The cat climbs on a tall tree." },
-      { value: 2, label: "The lion climbs on a areca tree." },
-      { value: 3, label: "The cat climbs on a areca tree." },
-      { value: 4, label: "The lion climbs on a tall tree." },
+      { value: 0, label: "The cat climbs on a tall tree." },
+      { value: 1, label: "The lion climbs on a areca tree." },
+      { value: 2, label: "The cat climbs on a areca tree." },
+      { value: 3, label: "The lion climbs on a tall tree." },
     ],
-    type: "other",
+    type: "radio",
   },
 ];
 
