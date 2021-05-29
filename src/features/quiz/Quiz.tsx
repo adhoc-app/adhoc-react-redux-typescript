@@ -1,36 +1,11 @@
 import React, { useState } from "react";
-import { Question, QuestionType } from "../../app/types";
+import { useAppSelector } from "../../app/hooks";
+import { QuestionType } from "../../app/types";
 import Card from "./Card";
-
-const mockQuestions: Question[] = [
-  {
-    prompt: "ăn cơm",
-    options: [
-      { value: 1, label: "sleep" },
-      { value: 2, label: "write" },
-      { value: 3, label: "eat" },
-      { value: 4, label: "work" },
-    ],
-    type: "radio",
-  },
-  {
-    prompt: "Con mèo trèo cây cau.",
-    options: [
-      { value: 1, label: "The cat climbs on a tall tree." },
-      { value: 2, label: "The lion climbs on a areca tree." },
-      { value: 3, label: "The cat climbs on a areca tree." },
-      { value: 4, label: "The lion climbs on a tall tree." },
-    ],
-    type: "radio",
-  },
-  {
-    prompt: "Hôm nay ăn gì?",
-    type: "text",
-  },
-];
+import { selectQuestions } from "./questions/questionsSlice";
 
 function Quiz() {
-  const questions = mockQuestions;
+  const questions = useAppSelector(selectQuestions);
   const [questionIndex, setQuestionIndex] = useState(0);
 
   const handleGoBack = () => {
