@@ -5,7 +5,9 @@ import {
   FormLabel,
 } from "@material-ui/core";
 import React, { useState } from "react";
+import { useAppSelector } from "../../app/hooks";
 import { Option, QuestionType } from "../../app/types";
+import { selectQuestions } from "./questions/questionsSlice";
 import RadioInput from "./RadioInput";
 import TextInput from "./TextInput";
 
@@ -26,6 +28,7 @@ function QuestionForm({
   handleGoBack,
   handleGoNext,
 }: QuestionFormProps) {
+  const questions = useAppSelector(selectQuestions);
   const [selected, setSelected] = useState("");
   const [helperText, setHelperText] = useState("");
 
@@ -63,8 +66,9 @@ function QuestionForm({
         <div className="flex flex-col md:flex-row ">
           <Button
             id={`back_btn_${index}`}
-            variant="text"
+            variant="outlined"
             color="default"
+            disabled={index === 0}
             onClick={(event) => handleGoBack(event)}
           >
             Back
