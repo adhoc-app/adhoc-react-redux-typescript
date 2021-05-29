@@ -37,7 +37,11 @@ export const getAnswer = createAsyncThunk(
 export const answerSlice = createSlice({
   name: "answer",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCorrectAnswer: (state) => {
+      state.correctAnswer = undefined;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getAnswer.fulfilled, (state, action) => {
       state.correctAnswer = action.payload;
@@ -45,5 +49,7 @@ export const answerSlice = createSlice({
     });
   },
 });
+
+export const { resetCorrectAnswer } = answerSlice.actions;
 
 export default answerSlice.reducer;

@@ -1,8 +1,8 @@
 import { Button, FormControl, FormLabel } from "@material-ui/core";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Option, QuestionType } from "../../app/types";
-import { getAnswer } from "./answers/answerSlice";
+import { getAnswer, resetCorrectAnswer } from "./answers/answerSlice";
 import { selectQuestions } from "./questions/questionsSlice";
 import RadioInput from "./RadioInput";
 import TextInput from "./TextInput";
@@ -27,6 +27,11 @@ function QuestionForm({
   const questions = useAppSelector(selectQuestions);
   const dispatch = useAppDispatch();
   const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    setSelected("");
+    dispatch(resetCorrectAnswer());
+  }, [index, dispatch]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected((event.target as HTMLInputElement).value);
