@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { Question, QuestionType } from "../../app/types";
 import Card from "./Card";
 
 const mockQuestions: Question[] = [
+  {
+    prompt: "ăn cơm",
+    options: [
+      { value: 1, label: "sleep" },
+      { value: 2, label: "write" },
+      { value: 3, label: "eat" },
+      { value: 4, label: "work" },
+    ],
+    type: "radio",
+  },
   {
     prompt: "Con mèo trèo cây cau.",
     options: [
@@ -11,6 +21,10 @@ const mockQuestions: Question[] = [
       { value: 3, label: "The cat climbs on a areca tree." },
       { value: 4, label: "The lion climbs on a tall tree." },
     ],
+    type: "radio",
+  },
+  {
+    prompt: "Hôm nay ăn gì?",
     type: "text",
   },
 ];

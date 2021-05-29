@@ -11,7 +11,7 @@ import TextInput from "./TextInput";
 
 export type QuestionFormProps = {
   index: number;
-  options: Option[];
+  options?: Option[];
   prompt: string;
   type: QuestionType;
   handleGoBack: (event: React.MouseEvent<HTMLElement>) => void;
@@ -45,7 +45,7 @@ function QuestionForm({
           questionIndex={index}
           selected={selected}
           handleChange={handleChange}
-          options={options}
+          options={options!}
         />
       );
     }
