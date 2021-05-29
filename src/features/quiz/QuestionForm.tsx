@@ -1,11 +1,8 @@
-import {
-  Button,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-} from "@material-ui/core";
+import { Button, FormControl, FormLabel } from "@material-ui/core";
 import React, { useState } from "react";
+import { useAppDispatch } from "../../app/hooks";
 import { Option, QuestionType } from "../../app/types";
+import { getAnswer } from "./answers/answerSlice";
 import RadioInput from "./RadioInput";
 import TextInput from "./TextInput";
 
@@ -17,6 +14,7 @@ type QuestionFormProps = {
 };
 
 function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
+  const dispatch = useAppDispatch();
   const [selected, setSelected] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -25,6 +23,7 @@ function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(getAnswer(index));
   };
 
   const renderOptions = () => {
