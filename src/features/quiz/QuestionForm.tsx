@@ -9,14 +9,23 @@ import { Option, QuestionType } from "../../app/types";
 import RadioInput from "./RadioInput";
 import TextInput from "./TextInput";
 
-type QuestionFormProps = {
+export type QuestionFormProps = {
   index: number;
   options: Option[];
   prompt: string;
   type: QuestionType;
+  handleGoBack: (event: React.MouseEvent<HTMLElement>) => void;
+  handleGoNext: (event: React.MouseEvent<HTMLElement>) => void;
 };
 
-function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
+function QuestionForm({
+  index,
+  options,
+  prompt,
+  type,
+  handleGoBack,
+  handleGoNext,
+}: QuestionFormProps) {
   const [selected, setSelected] = useState("");
   const [helperText, setHelperText] = useState("");
 
@@ -56,14 +65,19 @@ function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
             id={`back_btn_${index}`}
             variant="text"
             color="default"
-            // onClick={() => handleGoBack()}
+            onClick={(event) => handleGoBack(event)}
           >
             Back
           </Button>
           <Button type="submit" variant="contained" color="primary">
             Check Answer
           </Button>
-          <Button id={`next_btn_${index}`} variant="outlined" color="secondary">
+          <Button
+            id={`next_btn_${index}`}
+            variant="outlined"
+            color="secondary"
+            onClick={(event) => handleGoNext(event)}
+          >
             Next
           </Button>
         </div>

@@ -17,18 +17,34 @@ const mockQuestions: Question[] = [
 
 function Quiz() {
   const questions = mockQuestions;
+  const [questionIndex, setQuestionIndex] = useState(0);
+
+  const handleGoBack = () => {
+    setQuestionIndex(questionIndex - 1);
+  };
+
+  const handleGoNext = () => {
+    setQuestionIndex(questionIndex + 1);
+  };
+
+  const renderQuestion = () => {
+    const { prompt, options, type } = questions[questionIndex];
+    return (
+      <Card
+        key={questionIndex}
+        prompt={prompt}
+        options={options}
+        index={questionIndex}
+        type={type as QuestionType}
+        handleGoBack={handleGoBack}
+        handleGoNext={handleGoNext}
+      />
+    );
+  };
+
   return (
     <div className="flex h-screen justify-center items-center">
-      {questions &&
-        questions.map(({ prompt, options, type }, index) => (
-          <Card
-            key={index}
-            prompt={prompt}
-            options={options}
-            index={index}
-            type={type as QuestionType}
-          />
-        ))}
+      {renderQuestion()}
     </div>
   );
 }
