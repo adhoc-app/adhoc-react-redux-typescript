@@ -14,17 +14,17 @@ export const mockAnswer: Answer[] = [
 ];
 
 export interface AnswerState {
-  currentAnswer: number | undefined;
+  correctAnswer: number | undefined;
   answers: number[];
 }
 
 const initialState: AnswerState = {
-  currentAnswer: undefined,
+  correctAnswer: undefined,
   answers: [],
 };
 
 export const selectCurrentAnswer = (state: RootState) =>
-  state.answer.currentAnswer;
+  state.answer.correctAnswer;
 
 export const getAnswer = createAsyncThunk(
   "answer/getAnswer",
@@ -40,7 +40,7 @@ export const answerSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getAnswer.fulfilled, (state, action) => {
-      state.currentAnswer = action.payload;
+      state.correctAnswer = action.payload;
       state.answers = state.answers.concat([action.payload as number]);
     });
   },
