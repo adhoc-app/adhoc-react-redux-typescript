@@ -2,7 +2,11 @@ import { Button, FormControl, FormLabel } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Option, QuestionType } from "../../app/types";
-import { getAnswer, resetCorrectAnswer } from "./answers/answerSlice";
+import {
+  getAnswer,
+  resetCorrectAnswer,
+  selectCurrentAnswer,
+} from "./answers/answerSlice";
 import { selectQuestions } from "./questions/questionsSlice";
 import RadioInput from "./RadioInput";
 import TextInput from "./TextInput";
@@ -24,6 +28,7 @@ function QuestionForm({
   handleGoBack,
   handleGoNext,
 }: QuestionFormProps) {
+  const currentAnswer = useAppSelector(selectCurrentAnswer);
   const questions = useAppSelector(selectQuestions);
   const dispatch = useAppDispatch();
   const [selected, setSelected] = useState("");
@@ -82,7 +87,9 @@ function QuestionForm({
             id={`next_btn_${index}`}
             variant="outlined"
             color="default"
-            disabled={index === questions.length - 1 || !selected}
+            disabled={
+              index === questions.length - 1 || !selected || !currentAnswer
+            }
             onClick={(event) => handleGoNext(event)}
           >
             Next
