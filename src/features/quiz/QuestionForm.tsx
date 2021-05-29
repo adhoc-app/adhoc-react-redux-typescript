@@ -18,7 +18,6 @@ type QuestionFormProps = {
 
 function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
   const [selected, setSelected] = useState("");
-  const [helperText, setHelperText] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected((event.target as HTMLInputElement).value);
@@ -26,7 +25,6 @@ function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setHelperText("Clicked");
   };
 
   const renderOptions = () => {
@@ -52,7 +50,6 @@ function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
       <FormControl component="fieldset">
         <FormLabel component="legend">{prompt}</FormLabel>
         {renderOptions()}
-        <FormHelperText>{helperText}</FormHelperText>
         <div className="flex flex-col md:flex-row ">
           <Button
             id={`back_btn_${index}`}
