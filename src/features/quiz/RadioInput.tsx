@@ -1,6 +1,8 @@
 import { FormControlLabel, Radio, RadioGroup } from "@material-ui/core";
 import React from "react";
+import { useAppSelector } from "../../app/hooks";
 import { Option } from "../../app/types";
+import { selectCurrentAnswer } from "./answers/answerSlice";
 
 type RadioInputProps = {
   questionIndex: number;
@@ -14,6 +16,8 @@ const RadioInput = ({
   handleChange,
   options,
 }: RadioInputProps) => {
+  const currentAnswer = useAppSelector(selectCurrentAnswer);
+
   return (
     <RadioGroup
       aria-label={`question${questionIndex}`}
@@ -23,6 +27,15 @@ const RadioInput = ({
     >
       {options.map(({ value, label }, index) => (
         <FormControlLabel
+          className={
+            currentAnswer
+              ? index === currentAnswer
+                ? "text-green-600"
+                : index.toString() === selected
+                ? "text-red-600"
+                : ""
+              : ""
+          }
           key={index}
           value={value.toString()}
           control={<Radio />}

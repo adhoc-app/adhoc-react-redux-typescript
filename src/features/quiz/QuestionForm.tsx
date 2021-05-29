@@ -1,12 +1,8 @@
-import {
-  Button,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-} from "@material-ui/core";
+import { Button, FormControl, FormLabel } from "@material-ui/core";
 import React, { useState } from "react";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Option, QuestionType } from "../../app/types";
+import { getAnswer } from "./answers/answerSlice";
 import { selectQuestions } from "./questions/questionsSlice";
 import RadioInput from "./RadioInput";
 import TextInput from "./TextInput";
@@ -29,8 +25,8 @@ function QuestionForm({
   handleGoNext,
 }: QuestionFormProps) {
   const questions = useAppSelector(selectQuestions);
+  const dispatch = useAppDispatch();
   const [selected, setSelected] = useState("");
-  const [helperText, setHelperText] = useState("");
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected((event.target as HTMLInputElement).value);
@@ -38,22 +34,24 @@ function QuestionForm({
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setHelperText("Clicked");
+    dispatch(getAnswer(index));
   };
 
   const renderOptions = () => {
-    if (type === "radio") {
-      return (
-        <RadioInput
-          questionIndex={index}
-          selected={selected}
-          handleChange={handleChange}
-          options={options!}
-        />
-      );
-    }
-    if (type === "text") {
-      return <TextInput selected={selected} handleChange={handleChange} />;
+    switch (type) {
+      case "radio":
+        return (
+          <RadioInput
+            questionIndex={index}
+            selected={selected}
+            handleChange={handleChange}
+            options={options!}
+          />
+        );
+      case "text":
+        return <TextInput selected={selected} handleChange={handleChange} />;
+      default:
+        return <p>Mammamia!</p>;
     }
   };
 
@@ -62,7 +60,6 @@ function QuestionForm({
       <FormControl component="fieldset">
         <FormLabel component="legend">{prompt}</FormLabel>
         {renderOptions()}
-        <FormHelperText>{helperText}</FormHelperText>
         <div className="flex flex-col md:flex-row ">
           <Button
             id={`back_btn_${index}`}
