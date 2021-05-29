@@ -79,7 +79,8 @@ function QuestionForm({
           <Button
             id={`next_btn_${index}`}
             variant="outlined"
-            color="secondary"
+            color="default"
+            disabled={index === questions.length - 1 || !selected}
             onClick={(event) => handleGoNext(event)}
           >
             Next
