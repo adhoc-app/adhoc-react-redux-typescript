@@ -66,7 +66,7 @@ function QuestionForm({
         <FormLabel component="legend">{prompt}</FormLabel>
         {renderOptions()}
         <div className="flex flex-col md:flex-row ">
-          <Button
+          {/* <Button
             id={`back_btn_${index}`}
             variant="outlined"
             color="default"
@@ -74,7 +74,7 @@ function QuestionForm({
             onClick={(event) => handleGoBack(event)}
           >
             Back
-          </Button>
+          </Button> */}
           <Button type="submit" variant="contained" color="primary">
             Check Answer
           </Button>
