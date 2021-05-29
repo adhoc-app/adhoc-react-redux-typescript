@@ -10,3 +10,8 @@ export type Question = {
   options: Option[];
   type: QuestionType;
 };
+
+export type Answer = {
+  promptId: number;
+  answerId: number;
+};
