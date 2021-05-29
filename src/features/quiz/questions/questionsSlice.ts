@@ -6,20 +6,20 @@ const mockQuestions: Question[] = [
   {
     prompt: "ăn cơm",
     options: [
-      { value: 1, label: "sleep" },
+      { value: 0, label: "sleep" },
+      { value: 1, label: "eat" },
       { value: 2, label: "write" },
-      { value: 3, label: "eat" },
-      { value: 4, label: "work" },
+      { value: 3, label: "work" },
     ],
     type: "radio",
   },
   {
     prompt: "Con mèo trèo cây cau.",
     options: [
-      { value: 1, label: "The cat climbs on a tall tree." },
-      { value: 2, label: "The lion climbs on a areca tree." },
-      { value: 3, label: "The cat climbs on a areca tree." },
-      { value: 4, label: "The lion climbs on a tall tree." },
+      { value: 0, label: "The cat climbs on a tall tree." },
+      { value: 1, label: "The lion climbs on a areca tree." },
+      { value: 2, label: "The cat climbs on a areca tree." },
+      { value: 3, label: "The lion climbs on a tall tree." },
     ],
     type: "radio",
   },

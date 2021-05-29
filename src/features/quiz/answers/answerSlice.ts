@@ -5,6 +5,10 @@ import { Answer } from "./../../../app/types";
 export const mockAnswer: Answer[] = [
   {
     promptId: 0,
+    answerId: 1,
+  },
+  {
+    promptId: 1,
     answerId: 2,
   },
 ];
