@@ -5,22 +5,26 @@ import { Answer } from "./../../../app/types";
 export const mockAnswer: Answer[] = [
   {
     promptId: 0,
+    answerId: 1,
+  },
+  {
+    promptId: 1,
     answerId: 2,
   },
 ];
 
 export interface AnswerState {
-  currentAnswer: number | undefined;
+  correctAnswer: number | undefined;
   answers: number[];
 }
 
 const initialState: AnswerState = {
-  currentAnswer: undefined,
+  correctAnswer: undefined,
   answers: [],
 };
 
 export const selectCurrentAnswer = (state: RootState) =>
-  state.answer.currentAnswer;
+  state.answer.correctAnswer;
 
 export const getAnswer = createAsyncThunk(
   "answer/getAnswer",
@@ -33,13 +37,19 @@ export const getAnswer = createAsyncThunk(
 export const answerSlice = createSlice({
   name: "answer",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCorrectAnswer: (state) => {
+      state.correctAnswer = undefined;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getAnswer.fulfilled, (state, action) => {
-      state.currentAnswer = action.payload;
+      state.correctAnswer = action.payload;
       state.answers = state.answers.concat([action.payload as number]);
     });
   },
 });
+
+export const { resetCorrectAnswer } = answerSlice.actions;
 
 export default answerSlice.reducer;

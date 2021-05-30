@@ -1,21 +1,42 @@
 import { Button, FormControl, FormLabel } from "@material-ui/core";
-import React, { useState } from "react";
-import { useAppDispatch } from "../../app/hooks";
+import React, { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Option, QuestionType } from "../../app/types";
-import { getAnswer } from "./answers/answerSlice";
+import {
+  getAnswer,
+  resetCorrectAnswer,
+  selectCurrentAnswer,
+} from "./answers/answerSlice";
+import { selectQuestions } from "./questions/questionsSlice";
 import RadioInput from "./RadioInput";
 import TextInput from "./TextInput";
 
-type QuestionFormProps = {
+export type QuestionFormProps = {
   index: number;
-  options: Option[];
+  options?: Option[];
   prompt: string;
   type: QuestionType;
+  handleGoBack: (event: React.MouseEvent<HTMLElement>) => void;
+  handleGoNext: (event: React.MouseEvent<HTMLElement>) => void;
 };
 
-function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
+function QuestionForm({
+  index,
+  options,
+  prompt,
+  type,
+  handleGoBack,
+  handleGoNext,
+}: QuestionFormProps) {
+  const currentAnswer = useAppSelector(selectCurrentAnswer);
+  const questions = useAppSelector(selectQuestions);
   const dispatch = useAppDispatch();
   const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    setSelected("");
+    dispatch(resetCorrectAnswer());
+  }, [index, dispatch]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected((event.target as HTMLInputElement).value);
@@ -34,7 +55,7 @@ function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
             questionIndex={index}
             selected={selected}
             handleChange={handleChange}
-            options={options}
+            options={options!}
           />
         );
       case "text":
@@ -50,18 +71,27 @@ function QuestionForm({ index, options, prompt, type }: QuestionFormProps) {
         <FormLabel component="legend">{prompt}</FormLabel>
         {renderOptions()}
         <div className="flex flex-col md:flex-row ">
-          <Button
+          {/* <Button
             id={`back_btn_${index}`}
-            variant="text"
+            variant="outlined"
             color="default"
-            // onClick={() => handleGoBack()}
+            disabled={index === 0}
+            onClick={(event) => handleGoBack(event)}
           >
             Back
-          </Button>
+          </Button> */}
           <Button type="submit" variant="contained" color="primary">
             Check Answer
           </Button>
-          <Button id={`next_btn_${index}`} variant="outlined" color="secondary">
+          <Button
+            id={`next_btn_${index}`}
+            variant="outlined"
+            color="default"
+            disabled={
+              index === questions.length - 1 || !selected || !currentAnswer
+            }
+            onClick={(event) => handleGoNext(event)}
+          >
             Next
           </Button>
         </div>

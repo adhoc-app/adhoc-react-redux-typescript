@@ -7,7 +7,7 @@ export type QuestionType = "radio" | "text" | "other";
 
 export type Question = {
   prompt: string;
-  options: Option[];
+  options?: Option[];
   type: QuestionType;
 };
 
