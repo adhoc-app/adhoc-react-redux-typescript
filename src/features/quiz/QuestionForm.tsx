@@ -95,6 +95,16 @@ function QuestionForm({
             Next
           </Button>
         </div>
+        <div className="flex flex-col md:flex-row ">
+          <Button
+            component={Link}
+            to="/results"
+            variant="contained"
+            color="secondary"
+          >
+            Finish
+          </Button>
+        </div>
       </FormControl>
     </form>
   );
