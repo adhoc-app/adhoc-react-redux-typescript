@@ -16,15 +16,20 @@ export const mockAnswer: Answer[] = [
 export interface AnswerState {
   correctAnswer: number | undefined;
   answers: number[];
+  correctAnswerCount: number;
 }
 
 const initialState: AnswerState = {
   correctAnswer: undefined,
   answers: [],
+  correctAnswerCount: 0,
 };
 
 export const selectCurrentAnswer = (state: RootState) =>
   state.answer.correctAnswer;
+
+export const selectCorrectAnswerCount = (state: RootState) =>
+  state.answer.correctAnswerCount;
 
 export const getAnswer = createAsyncThunk(
   "answer/getAnswer",
@@ -41,6 +46,9 @@ export const answerSlice = createSlice({
     resetCorrectAnswer: (state) => {
       state.correctAnswer = undefined;
     },
+    incrementCount: (state) => {
+      state.correctAnswerCount += 1;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getAnswer.fulfilled, (state, action) => {
@@ -50,6 +58,6 @@ export const answerSlice = createSlice({
   },
 });
 
-export const { resetCorrectAnswer } = answerSlice.actions;
+export const { resetCorrectAnswer, incrementCount } = answerSlice.actions;
 
 export default answerSlice.reducer;
