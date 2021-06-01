@@ -1,9 +1,11 @@
 import { Button, FormControl, FormLabel } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Option, QuestionType } from "../../app/types";
 import {
   getAnswer,
+  incrementCount,
   resetCorrectAnswer,
   selectCurrentAnswer,
 } from "./answers/answerSlice";
@@ -37,6 +39,12 @@ function QuestionForm({
     setSelected("");
     dispatch(resetCorrectAnswer());
   }, [index, dispatch]);
+
+  useEffect(() => {
+    if (currentAnswer && parseInt(selected) === currentAnswer) {
+      dispatch(incrementCount());
+    }
+  }, [currentAnswer, selected, dispatch]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected((event.target as HTMLInputElement).value);
@@ -93,6 +101,16 @@ function QuestionForm({
             onClick={(event) => handleGoNext(event)}
           >
             Next
+          </Button>
+        </div>
+        <div className="flex flex-col md:flex-row ">
+          <Button
+            component={Link}
+            to="/results"
+            variant="contained"
+            color="secondary"
+          >
+            Finish
           </Button>
         </div>
       </FormControl>
