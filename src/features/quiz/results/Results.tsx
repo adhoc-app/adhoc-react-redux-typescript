@@ -1,15 +1,17 @@
 import { Button } from "@material-ui/core";
 import React from "react";
 import { BrowserRouter as Router, useHistory } from "react-router-dom";
-import { useAppSelector } from "../../../app/hooks";
-import { selectCorrectAnswerCount } from "../answers/answerSlice";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import { resetCount, selectCorrectAnswerCount } from "../answers/answerSlice";
 
 const Results = () => {
+  const dispatch = useAppDispatch();
   const correctAnswerCount = useAppSelector(selectCorrectAnswerCount);
   const history = useHistory();
 
   const handleHistory = () => {
     history.push("/");
+    dispatch(resetCount());
   };
 
   return (

@@ -49,6 +49,7 @@ export const answerSlice = createSlice({
     incrementCount: (state) => {
       state.correctAnswerCount += 1;
     },
+    resetCount: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder.addCase(getAnswer.fulfilled, (state, action) => {
@@ -58,6 +59,7 @@ export const answerSlice = createSlice({
   },
 });
 
-export const { resetCorrectAnswer, incrementCount } = answerSlice.actions;
+export const { resetCorrectAnswer, incrementCount, resetCount } =
+  answerSlice.actions;
 
 export default answerSlice.reducer;
