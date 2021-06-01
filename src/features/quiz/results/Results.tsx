@@ -9,7 +9,7 @@ const Results = () => {
   const correctAnswerCount = useAppSelector(selectCorrectAnswerCount);
   const history = useHistory();
 
-  const handleHistory = () => {
+  const handleStartNewQuiz = () => {
     history.push("/");
     dispatch(resetCount());
   };
@@ -22,7 +22,11 @@ const Results = () => {
           <h4>You Scored: {correctAnswerCount}</h4>
         </div>
         <div>
-          <Button onClick={handleHistory} variant="contained" color="secondary">
+          <Button
+            onClick={handleStartNewQuiz}
+            variant="contained"
+            color="secondary"
+          >
             Try a new Quiz!
           </Button>
         </div>
