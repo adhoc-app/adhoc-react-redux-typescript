@@ -14,12 +14,10 @@ type TextInputProps = {
 
 const TextInput = ({
   correctTextInput,
-  questionIndex,
   selected,
   handleChange,
 }: TextInputProps) => {
   const currentAnswer = useAppSelector(selectCurrentAnswer);
-
 
   return (
     <TextField
