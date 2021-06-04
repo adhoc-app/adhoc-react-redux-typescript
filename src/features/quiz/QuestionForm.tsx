@@ -46,18 +46,13 @@ function QuestionForm({
 
   useEffect(() => {
     if (currentAnswer && type === "text") {
-      const textAnswer = (mockQuestions[index].options as Option[]).find(
-        (opt) => opt.value === currentAnswer
-      )?.label;
-
-      if (selected.toLocaleLowerCase() === textAnswer!.toLocaleLowerCase()) {
-        setCorrectTextInput(true);
-      }
+      setCorrectTextInput(
+        selected.toLocaleLowerCase() === textAnswer!.toLocaleLowerCase()
+      );
     }
-  }, [currentAnswer, type, index, selected]);
+  }, [currentAnswer, type, index, selected, textAnswer]);
 
   useEffect(() => {
-    // if type is radio:
     if (
       currentAnswer &&
       type === "radio" &&
@@ -65,7 +60,6 @@ function QuestionForm({
     ) {
       dispatch(incrementCount());
     }
-    // if type is text: compare
     if (
       currentAnswer &&
       type === "text" &&
