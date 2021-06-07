@@ -33,8 +33,12 @@ function QuestionForm({
   const currentAnswer = useAppSelector(selectCurrentAnswer);
   const questions = useAppSelector(selectQuestions);
   const dispatch = useAppDispatch();
+
   const [selected, setSelected] = useState("");
+  const [radioDisabled, setRadioDisabled] = useState(false);
   const [correctTextInput, setCorrectTextInput] = useState(false);
+  const [isGraded, setIsGraded] = useState(false);
+
   const textAnswer = (mockQuestions[index].options as Option[]).find(
     (opt) => opt.value === currentAnswer
   )?.label;
@@ -53,21 +57,23 @@ function QuestionForm({
   }, [currentAnswer, type, index, selected, textAnswer]);
 
   useEffect(() => {
-    if (
-      currentAnswer &&
-      type === "radio" &&
-      parseInt(selected) === currentAnswer
-    ) {
-      dispatch(incrementCount());
+    if (!isGraded && currentAnswer) {
+      if (type === "radio" && parseInt(selected) === currentAnswer) {
+        dispatch(incrementCount());
+      }
+      if (
+        type === "text" &&
+        selected.toLocaleLowerCase() === textAnswer!.toLocaleLowerCase()
+      ) {
+        dispatch(incrementCount());
+      }
+      setIsGraded(true);
     }
-    if (
-      currentAnswer &&
-      type === "text" &&
-      selected.toLocaleLowerCase() === textAnswer!.toLocaleLowerCase()
-    ) {
-      dispatch(incrementCount());
-    }
-  }, [currentAnswer, selected, dispatch, textAnswer, type]);
+  }, [currentAnswer, selected, dispatch, textAnswer, type, isGraded]);
+
+  useEffect(() => {
+    setIsGraded(false);
+  }, [index]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected((event.target as HTMLInputElement).value);
@@ -76,6 +82,7 @@ function QuestionForm({
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(getAnswer(index));
+    setRadioDisabled(true);
   };
 
   const renderOptions = () => {
@@ -118,7 +125,12 @@ function QuestionForm({
           >
             Back
           </Button> */}
-          <Button type="submit" variant="contained" color="primary">
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            disabled={radioDisabled}
+          >
             Check Answer
           </Button>
           <Button
