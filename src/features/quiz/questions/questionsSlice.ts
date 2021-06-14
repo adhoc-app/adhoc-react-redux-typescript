@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../../app/store";
 import { Question } from "../../../app/types";
 
-const mockQuestions: Question[] = [
+export const mockQuestions: Question[] = [
   {
     prompt: "ăn cơm",
     options: [
@@ -25,6 +25,7 @@ const mockQuestions: Question[] = [
   },
   {
     prompt: "Hôm nay ăn gì?",
+    options: [{ value: 2, label: "what to eat today?" }],
     type: "text",
   },
 ];

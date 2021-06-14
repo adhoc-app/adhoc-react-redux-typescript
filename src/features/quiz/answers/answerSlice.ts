@@ -11,6 +11,10 @@ export const mockAnswer: Answer[] = [
     promptId: 1,
     answerId: 2,
   },
+  {
+    promptId: 2,
+    answerId: 2,
+  },
 ];
 
 export interface AnswerState {

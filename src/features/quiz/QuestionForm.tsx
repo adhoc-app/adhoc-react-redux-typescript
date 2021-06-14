@@ -9,7 +9,7 @@ import {
   resetCorrectAnswer,
   selectCurrentAnswer,
 } from "./answers/answerSlice";
-import { selectQuestions } from "./questions/questionsSlice";
+import { mockQuestions, selectQuestions } from "./questions/questionsSlice";
 import RadioInput from "./RadioInput";
 import TextInput from "./TextInput";
 
@@ -34,6 +34,10 @@ function QuestionForm({
   const questions = useAppSelector(selectQuestions);
   const dispatch = useAppDispatch();
   const [selected, setSelected] = useState("");
+  const [correctTextInput, setCorrectTextInput] = useState(false);
+  const textAnswer = (mockQuestions[index].options as Option[]).find(
+    (opt) => opt.value === currentAnswer
+  )?.label;
 
   useEffect(() => {
     setSelected("");
@@ -41,10 +45,29 @@ function QuestionForm({
   }, [index, dispatch]);
 
   useEffect(() => {
-    if (currentAnswer && parseInt(selected) === currentAnswer) {
+    if (currentAnswer && type === "text") {
+      setCorrectTextInput(
+        selected.toLocaleLowerCase() === textAnswer!.toLocaleLowerCase()
+      );
+    }
+  }, [currentAnswer, type, index, selected, textAnswer]);
+
+  useEffect(() => {
+    if (
+      currentAnswer &&
+      type === "radio" &&
+      parseInt(selected) === currentAnswer
+    ) {
       dispatch(incrementCount());
     }
-  }, [currentAnswer, selected, dispatch]);
+    if (
+      currentAnswer &&
+      type === "text" &&
+      selected.toLocaleLowerCase() === textAnswer!.toLocaleLowerCase()
+    ) {
+      dispatch(incrementCount());
+    }
+  }, [currentAnswer, selected, dispatch, textAnswer, type]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelected((event.target as HTMLInputElement).value);
@@ -67,7 +90,14 @@ function QuestionForm({
           />
         );
       case "text":
-        return <TextInput selected={selected} handleChange={handleChange} />;
+        return (
+          <TextInput
+            correctTextInput={correctTextInput}
+            questionIndex={index}
+            selected={selected}
+            handleChange={handleChange}
+          />
+        );
       default:
         return <p>Mammamia!</p>;
     }
