@@ -29,9 +29,7 @@ export const GoogleSignIn: FunctionComponent<GoogleSignInProps> = () => {
 
   return (
     <div className="text-center mb-4">
-      <h1 className="h3 mb-3 font-weight-normal">Welcome to Library Portal</h1>
       {loginFailed && <p>"Could not sign you in! Try again."</p>}
-      <p>Sign In</p>
       {showloginButton ? (
         <GoogleLogin
           clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}
