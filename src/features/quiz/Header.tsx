@@ -30,15 +30,12 @@ export default function Header() {
   const open = Boolean(anchorEl);
   const history = useHistory();
 
-  const handleBackHome = () => {
-    history.push("/");
-  };
-
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleMenuClick = (PageURL: string) => {
+    history.push(PageURL);
     setAnchorEl(null);
   };
 
@@ -48,7 +45,7 @@ export default function Header() {
         <Toolbar>
           <div>
             <Button
-              onClick={handleBackHome}
+              onClick={() => handleMenuClick("/")}
               variant="contained"
               color="secondary"
             >
@@ -81,10 +78,15 @@ export default function Header() {
                 horizontal: "right",
               }}
               open={open}
-              onClose={handleClose}
+              onClose={() => setAnchorEl(null)}
             >
-              <MenuItem onClick={handleClose}>Login</MenuItem>
-              <MenuItem onClick={handleClose}>Start Quiz</MenuItem>
+              <MenuItem onClick={() => handleMenuClick("/login")}>
+                Login
+              </MenuItem>
+              <MenuItem onClick={() => handleMenuClick("/quiz")}>
+                Start Quiz
+              </MenuItem>
+              <MenuItem onClick={() => handleMenuClick("/")}>Home</MenuItem>
             </Menu>
           </div>
         </Toolbar>
