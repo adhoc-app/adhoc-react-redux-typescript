@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./features/quiz/Header";
 import Homepage from "./features/quiz/Homepage";
 import Loginpage from "./features/quiz/Loginpage";
+import QuestionCreation from "./features/quiz/QuestionCreation";
 import Quiz from "./features/quiz/Quiz";
 import Results from "./features/quiz/results/Results";
 
@@ -16,6 +17,7 @@ function App() {
           <Route exact path="/results" component={Results} />
           <Route exact path="/quiz" component={Quiz} />
           <Route exact path="/login" component={Loginpage} />
+          <Route exact path="/createquestion" component={QuestionCreation} />
         </Switch>
       </div>
     </Router>
